@@ -103,7 +103,7 @@ Open <http://localhost:3000> (the seed prints the admin password once to the con
 ## Testing
 
 - **Unit** (Vitest): pricing engine, state machine, stock logic — 57 tests in `packages/shared`.
-- **Integration** (Vitest against a real Postgres): 125 API tests including tenant-isolation security specs. Set `TEST_DATABASE_URL` to a migrated PostgreSQL database; without it these suites skip with a warning.
+- **Integration** (Vitest against a real Postgres): 125 API tests including tenant-isolation security specs. Set `TEST_DATABASE_URL` to a migrated PostgreSQL database; without it these suites skip with a warning. CI runs the full suite against a PostgreSQL 16 service on every push.
 - **End-to-end** (Playwright): 55 scenarios covering the full quote → order → pick → ship → return flow; point `E2E_BASE_URL` at a running deployment.
 
 ## Deployment
