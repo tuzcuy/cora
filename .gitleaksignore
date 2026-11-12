@@ -1,0 +1,6 @@
+# False positives — dummy 16-char hex values used to satisfy env validation in tests
+# (apps/api/src/config/env.schema.test.ts). Not real credentials.
+2276e5a2e4c3a49c5acb3566473d40b87e8f8031:apps/api/src/config/env.schema.test.ts:generic-api-key:6
+2276e5a2e4c3a49c5acb3566473d40b87e8f8031:apps/api/src/config/env.schema.test.ts:generic-api-key:7
+apps/api/src/config/env.schema.test.ts:generic-api-key:6
+apps/api/src/config/env.schema.test.ts:generic-api-key:7
