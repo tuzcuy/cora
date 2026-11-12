@@ -1,0 +1,52 @@
+# deps
+node_modules/
+.pnpm-store/
+
+# builds
+dist/
+build/
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+
+# turbo
+.turbo/
+
+# env & secrets
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# prisma
+apps/api/prisma/*.db
+
+# logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# test / coverage
+coverage/
+playwright-report/
+test-results/
+.playwright/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# editor
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# generated api types
+apps/web/src/lib/api/schema.d.ts
+
+# deploy target (holds the exact logo.corantsoft.com public_html path)
+deploy/.web-target
+
+# API deploy paketi (build artefaktı)
+deploy/cora-deploy.zip

@@ -1,0 +1,68 @@
+# Cora — geliştirme altyapısı (Docker olan makineler için).
+# NOT: Bu makinede Docker yok; yerel dev Homebrew postgres@16 + redis ile yürüyor (docs/DECISIONS.md D-008).
+# Bu dosya VPS/Docker olan ortamlarda tam stack'i ayağa kaldırır: `docker compose -f docker-compose.dev.yml up -d`.
+name: cora-dev
+
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: cora
+      POSTGRES_PASSWORD: cora
+      POSTGRES_DB: cora_dev
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U cora -d cora_dev']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7
+    ports:
+      - '6379:6379'
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  minio:
+    image: minio/minio:latest
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: cora
+      MINIO_ROOT_PASSWORD: cora-secret
+    ports:
+      - '9000:9000'
+      - '9001:9001'
+    volumes:
+      - miniodata:/data
+    healthcheck:
+      test: ['CMD', 'mc', 'ready', 'local']
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  gotenberg:
+    image: gotenberg/gotenberg:8
+    command:
+      - gotenberg
+      - --api-port=3050
+    ports:
+      - '3050:3050'
+
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - '1025:1025' # SMTP
+      - '8025:8025' # Web UI
+    environment:
+      MP_MAX_MESSAGES: 500
+
+volumes:
+  pgdata:
+  miniodata:

@@ -1,0 +1,54 @@
+{
+  "name": "cora",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@10.33.2",
+  "engines": {
+    "node": ">=20.11"
+  },
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "build:api": "pnpm --filter @cora/shared build && pnpm --filter @cora/api build",
+    "start:api": "pnpm --filter @cora/api start",
+    "build:web:static": "pnpm --filter @cora/shared build && pnpm --filter @cora/web build",
+    "start:web": "pnpm --filter @cora/web start",
+    "deploy:web": "bash deploy/deploy-web-shared.sh",
+    "pack:deploy": "bash deploy/pack-deploy.sh",
+    "build:smoke": "pnpm --filter @cora/shared build && pnpm --filter @cora/smoke build",
+    "start:smoke": "pnpm --filter @cora/smoke start",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "e2e": "pnpm --filter @cora/web e2e",
+    "db:migrate": "pnpm --filter @cora/api db:migrate",
+    "db:seed": "pnpm --filter @cora/api db:seed",
+    "db:studio": "pnpm --filter @cora/api db:studio",
+    "deploy:staging": "bash deploy/deploy.sh",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "24.13.3",
+    "eslint": "10.9.1",
+    "globals": "^17.12.0",
+    "husky": "9.1.7",
+    "lint-staged": "17.4.1",
+    "prettier": "3.9.6",
+    "tsx": "4.23.13",
+    "turbo": "2.10.12",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.69.0",
+    "vitest": "5.0.0"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,mjs,cjs}": [
+      "prettier --write"
+    ],
+    "*.{json,md,yml,yaml,css}": [
+      "prettier --write"
+    ]
+  }
+}

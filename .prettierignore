@@ -1,0 +1,9 @@
+node_modules
+dist
+build
+.next
+.turbo
+coverage
+pnpm-lock.yaml
+**/prisma/migrations/**
+apps/web/src/lib/api/schema.d.ts

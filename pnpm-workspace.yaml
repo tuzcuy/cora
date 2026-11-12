@@ -1,0 +1,15 @@
+packages:
+  - apps/*
+  - packages/*
+
+# pnpm 10 blocks postinstall build scripts by default; allow the native ones we trust.
+onlyBuiltDependencies:
+  - argon2
+  - sharp
+  - esbuild
+  - '@swc/core'
+  - '@prisma/client'
+  - '@prisma/engines'
+  - prisma
+  - '@tailwindcss/oxide'
+  - unrs-resolver
